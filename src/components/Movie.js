@@ -18,7 +18,10 @@ function Movie({ movies }) {
             alt={movie.title}
             className={styles.movie__img}
           />
-          <Link to={`/movie/${movie.id}`}>
+          <Link
+            to={`/movie/${movie.id}`}
+            style={{ textDecoration: "none", color: "#000000" }}
+          >
             <h2 className={styles.movie__title}>{movie.title}</h2>
           </Link>
           <h3 className={styles.movie__year}>{movie.year}</h3>

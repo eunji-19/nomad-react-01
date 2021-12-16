@@ -28,7 +28,11 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      {loading ? <h2>Loading...</h2> : <Movie movies={movies} />}
+      {loading ? (
+        <h2 style={{ color: "#838383" }}>Loading...</h2>
+      ) : (
+        <Movie movies={movies} />
+      )}
     </div>
   );
 }

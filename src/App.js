@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import Detail from "./routes/Detail";
+import Navigation from "./components/Navigation";
 
 /**
  * npm i react-router-dom@5.3.0
@@ -25,8 +26,18 @@ import Detail from "./routes/Detail";
 function App() {
   return (
     <Router>
+      <Navigation />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home />} exact={true}></Route>
+        <Route
+          path="/about"
+          element={
+            <div style={{ textAlign: "center" }}>
+              <h3>About</h3>
+            </div>
+          }
+          exact={true}
+        ></Route>
         <Route path="/movie/:id" element={<Detail />}></Route>
       </Routes>
     </Router>
