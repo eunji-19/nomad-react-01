@@ -1,56 +1,35 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 
+/**
+ * npm i react-router-dom@5.3.0
+ * react-router-dom 버전5->버전6 달라진 점
+ * : Switch컴포넌트가 사라지고 -> Routes컴포넌트로 대체
+ * : Route컴포넌트 사이에 자식 컴포넌트를 넣지 않고 -> element prop에 자식 컴포넌트를 할당
+ * https://velog.io/@kcdoggo/Switch-is-not-exported-from-react-router-dom-%EC%97%90%EB%9F%AC
+ * 
+  function App() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
+ */
 function App() {
-  /**
-   * state가 변화할때마다 모든 Component 재실행
-   * API 호출시에는 한번만 실행되어야 함
-   *
-   * useEffect(effect, deps)
-   * - 우리 코드가 딱 한번만 실행될 수 있도록 보호해줌 (State 변화해도)
-   * - effect(첫번째 인자): 딱 한번만 실행하고 싶은 코드
-   * - deps(두번째 인자) : [] 빈 배열
-   */
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onClick = () => setValue((current) => current + 1);
-  const onChange = (event) => {
-    setKeyword(event.target.value);
-  };
-  console.log("I run all the time");
-  /**
-   * []
-   * : React 지켜볼게 없으니까 처음 한번만 실행됨
-   */
-  useEffect(() => {
-    console.log("I run only once");
-  }, []);
-  /**
-   * [keyword]
-   * : keyword가 변화할때 코드 한번 실행하게 함
-   * : keyword 변화할때 코드 실행하라고 알려줌
-   */
-  useEffect(() => {
-    if (keyword !== "" && keyword.length > 5) {
-      console.log("I run when 'keyword' changes");
-    }
-  }, [keyword]);
-  useEffect(() => {
-    console.log("I run when 'counter' changes");
-  }, [counter]);
-  useEffect(() => {
-    console.log("I run when 'keyword' and 'counter' changes");
-  }, [keyword, counter]);
   return (
-    <div>
-      <input
-        value={keyword}
-        onChange={onChange}
-        type="text"
-        placeholder="Search Here"
-      />
-      <h3>{counter}</h3>
-      <button onClick={onClick}>Click Me</button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/movie/:id" element={<Detail />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
